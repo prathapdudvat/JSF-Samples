@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+	
+    <h:head>
+        <title>Room Expense Management</title>
+    </h:head>
+    <h:body>
+    	<p:panel header="Monthly Report: Current Month">
+    	<h:form>
+    	<p:tabView>
+    	<p:tab title="Graphical View">
+    	<p:chart type="bar" model="#{dashBoardMBean.barModel}" style="height:300px"/>
+    	</p:tab>
+    	<p:tab title="Detailed List">
+    	  <p:dataTable value="#{dashBoardMBean.transEntryList}" var="teItem" sortMode="multiple" >
+    	  	<p:column  sortBy="#{teItem.transDate}" >
+    	  		<f:facet name="header">
+    	  			<h:outputLabel value="Transaction Date"></h:outputLabel>
+    	  		</f:facet>
+    	  		<h:outputLabel value="#{teItem.transDate}">
+    	  			<f:convertDateTime pattern="#{rmsConstantMBean.appDateFormat}" ></f:convertDateTime>
+    	  		</h:outputLabel>
+    	  	</p:column>
+    	  	<p:column  sortBy="#{teItem.item}" >
+    	  		<f:facet name="header">
+    	  			<h:outputLabel value="Item"></h:outputLabel>
+    	  		</f:facet>
+    	  		<h:outputLabel value="#{teItem.item}"></h:outputLabel>
+    	  	</p:column>
+    	  	<p:column  sortBy="#{teItem.amount}" >
+    	  		<f:facet name="header" >
+    	  			<h:outputLabel value="Amount"></h:outputLabel>
+    	  		</f:facet>
+    	  		<h:outputLabel value="#{teItem.amount}"></h:outputLabel>
+    	  	</p:column>
+    	  	<p:column  sortBy="#{teItem.createdBy.uid}" >
+    	  		<f:facet name="header">
+    	  			<h:outputLabel value="Created By"></h:outputLabel>
+    	  		</f:facet>
+    	  		<h:outputLabel value="#{teItem.createdBy.uid}"></h:outputLabel>
+    	  	</p:column>
+    	  	<p:column  sortBy="#{teItem.createdDate}">
+    	  		<f:facet name="header">
+    	  			<h:outputLabel value="Created Date"></h:outputLabel>
+    	  		</f:facet>
+    	  		<h:outputLabel value="#{teItem.createdDate}">
+    	  		<f:convertDateTime pattern="#{rmsConstantMBean.appDateFormat}" ></f:convertDateTime>
+    	  		</h:outputLabel>
+    	  	</p:column>
+    	  <p:column  sortBy="#{teItem.modifiedBy}">
+    	  		<f:facet name="header">
+    	  			<h:outputLabel value="Modified By"></h:outputLabel>
+    	  		</f:facet>
+    	  		<h:outputLabel value="#{teItem.modifiedBy}"></h:outputLabel>
+    	  	</p:column>
+    	  	<p:column  sortBy="#{teItem.modifiedDate}">
+    	  		<f:facet name="header">
+    	  			<h:outputLabel value="Modified Date"></h:outputLabel>
+    	  		</f:facet>
+    	  		<h:outputLabel value="#{teItem.modifiedDate}">
+    	  		<f:convertDateTime pattern="#{rmsConstantMBean.appDateFormat}" ></f:convertDateTime>
+    	  		</h:outputLabel>
+    	  	</p:column>
+    	  </p:dataTable>
+    	  </p:tab>
+    	  </p:tabView>
+    	</h:form>
+    	</p:panel>
+    </h:body>
+</html>
